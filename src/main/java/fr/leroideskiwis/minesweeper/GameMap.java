@@ -18,4 +18,21 @@ public class GameMap {
         this.totalBomb = totalBomb;
     }
 
+    private void createBombs(){
+        List<Location> locations = new ArrayList<>();
+        Random random = new Random();
+        for(int i = 0; i < totalBomb; i++){
+            Location newLocation;
+            do{
+                newLocation = new Location(random.nextInt(0, width), random.nextInt(0, height))
+            }while(locations.contains(newLocation));
+
+            locations.add(newLocation);
+        }
+
+        for(Location location : locations){
+            cases.add(new Case(location, -1));
+        }
+
+    }
 }
