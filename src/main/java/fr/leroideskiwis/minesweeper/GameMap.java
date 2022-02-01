@@ -1,5 +1,7 @@
 package fr.leroideskiwis.minesweeper;
 
+import java.io.Console;
+import java.io.IOException;
 import java.util.*;
 
 public class GameMap {
@@ -41,6 +43,19 @@ public class GameMap {
         return cells.stream().filter(cell -> cell.isLocation(location)).findAny();
     }
 
+    public void switchflag() {
+        int x;
+        int y;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Entrez la colonne à flagger: ");
+        x = scanner.nextInt() - 1;
+        System.out.println("Entrez la ligne à flagger: ");
+        y = scanner.nextInt() - 1;
+        scanner.nextLine();
+        //scanner.close();
+        getCell(new Location(x, y)).ifPresent(Cell::switchFlag);
+    }
+
     private List<Cell> getNeighbours(Location location) {
         List<Cell> neighbours = new ArrayList<>();
         for (int x = -1; x < 2; x++) {
@@ -65,6 +80,16 @@ public class GameMap {
 
     }
 
+    public boolean isWon() {
+        boolean win = true;
+        for (Cell cell:cells) {
+            if (cell.isBomb() && !cell.isFlagged()) {
+                win = false;
+            }
+        }
+        return win;
+    }
+
     @Override
     public String toString() {
 
@@ -76,7 +101,7 @@ public class GameMap {
         for(int x = 0; x < width; x++){
             stringBuilder.append("\n").append(x+1).append(" ");
             for(int y = 0; y < height; y++){
-                getCell(new Location(y, x)).ifPresent(stringBuilder::append);
+                getCell(new Location(x, y)).ifPresent(stringBuilder::append);
                 stringBuilder.append(" ");
             }
         }
