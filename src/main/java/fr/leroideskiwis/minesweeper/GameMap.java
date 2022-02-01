@@ -43,8 +43,8 @@ public class GameMap {
 
     private List<Cell> getNeighbours(Location location) {
         List<Cell> neighbours = new ArrayList<>();
-        for (int x = -1; x < 1; x++) {
-            for (int y = -1; y < 1; y++) {
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
 
                 Location newLocation = location.add(x, y);
                 getCell(newLocation).ifPresent(neighbours::add);
@@ -76,7 +76,7 @@ public class GameMap {
         for(int x = 0; x < width; x++){
             stringBuilder.append("\n").append(x+1).append(" ");
             for(int y = 0; y < height; y++){
-                getCell(new Location(x, y)).ifPresent(stringBuilder::append);
+                getCell(new Location(y, x)).ifPresent(stringBuilder::append);
                 stringBuilder.append(" ");
             }
         }
