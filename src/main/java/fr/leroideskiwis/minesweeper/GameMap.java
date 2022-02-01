@@ -8,9 +8,10 @@ import java.util.Random;
 public class GameMap {
 
     private int flagsUsed = 0;
-    private int totalBomb;
-    private List<Case> cases = new ArrayList<>();
-    private int height, width;
+    private final int totalBomb;
+    private final List<Case> cases = new ArrayList<>();
+    private final int height;
+    private final int width;
 
     public GameMap(int height, int width, int totalBomb){
         this.height = height;
