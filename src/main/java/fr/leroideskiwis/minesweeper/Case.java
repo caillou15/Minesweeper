@@ -1,7 +1,5 @@
 package fr.leroideskiwis.minesweeper;
 
-import javax.swing.text.Position;
-
 public class Case {
 
     /**
@@ -11,12 +9,12 @@ public class Case {
      */
     private int value;
     private boolean reveal;
-    private final Position position;
+    private final Location location;
 
-    public Case(Position position, int value, boolean reveal){
+    public Case(Location location, int value, boolean reveal){
         this.value = value;
         this.reveal = reveal;
-        this.position = position;
+        this.location = location;
     }
 
     public boolean isBomb(){
