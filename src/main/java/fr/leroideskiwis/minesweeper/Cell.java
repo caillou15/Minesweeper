@@ -2,7 +2,7 @@ package fr.leroideskiwis.minesweeper;
 
 import java.util.List;
 
-public class Case {
+public class Cell {
 
     /**
      * -1 : bomb
@@ -13,14 +13,14 @@ public class Case {
     private boolean reveal;
     private final Location location;
 
-    public Case(Location location, List<Case> neighbours){
+    public Cell(Location location, List<Cell> neighbours){
         this(location, (int)neighbours
                 .stream()
-                .filter(Case::isBomb)
+                .filter(Cell::isBomb)
                 .count());
     }
 
-    public Case(Location location, int value){
+    public Cell(Location location, int value){
         this.value = value;
         this.location = location;
     }
