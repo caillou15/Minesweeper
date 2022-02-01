@@ -1,8 +1,5 @@
 package fr.leroideskiwis.minesweeper;
 
-import java.io.Console;
-import java.io.IOException;
-
 import java.util.*;
 
 public class GameMap {
