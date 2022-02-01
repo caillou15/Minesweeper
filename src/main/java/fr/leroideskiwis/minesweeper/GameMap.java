@@ -24,7 +24,7 @@ public class GameMap {
         for(int i = 0; i < totalBomb; i++){
             Location newLocation;
             do{
-                newLocation = new Location(random.nextInt(0, width), random.nextInt(0, height))
+                newLocation = new Location(random.nextInt(0, width), random.nextInt(0, height));
             }while(locations.contains(newLocation));
 
             locations.add(newLocation);
@@ -35,4 +35,7 @@ public class GameMap {
         }
 
     }
+
+
+
 }
