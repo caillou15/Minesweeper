@@ -11,14 +11,17 @@ public class Case {
     private boolean reveal;
     private final Location location;
 
-    public Case(Location location, int value, boolean reveal){
+    public Case(Location location, int value){
         this.value = value;
-        this.reveal = reveal;
         this.location = location;
     }
 
     public boolean isBomb(){
         return value == -1;
+    }
+
+    public void reveal(){
+        this.reveal = true;
     }
 
     public boolean isEmpty(){
