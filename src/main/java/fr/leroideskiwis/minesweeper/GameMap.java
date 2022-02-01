@@ -87,4 +87,12 @@ public class GameMap {
         return stringBuilder.toString();
 
     }
+
+    public void flag(Location location){
+        getCell(location).ifPresent(Cell::flag);
+    }
+
+    public void reveal(Location location){
+        getCell(location).ifPresent(Cell::reveal);
+    }
 }
