@@ -1,5 +1,8 @@
 package fr.leroideskiwis.minesweeper;
 
+import java.io.Console;
+import java.io.IOException;
+
 import java.util.*;
 
 public class GameMap {
@@ -8,7 +11,9 @@ public class GameMap {
     private final List<Cell> cells = new ArrayList<>();
     private final int height;
     private final int width;
+
     private GameState state = GameState.PLAYING;
+
 
     public GameMap(int width, int height, int totalBomb){
         this.height = height;
@@ -22,6 +27,7 @@ public class GameMap {
     public boolean isState(GameState gameState){
         return this.state == gameState;
     }
+
 
     private void createBombs(){
         List<Location> locations = new ArrayList<>();
@@ -43,6 +49,7 @@ public class GameMap {
 
     private Optional<Cell> getCell(Location location){
         return cells.stream().filter(cell -> cell.isLocation(location)).findAny();
+
     }
 
     public List<Cell> getNeighbours(Location location) {
@@ -92,8 +99,9 @@ public class GameMap {
 
     }
 
+
     public void flag(Location location){
-        getCell(location).ifPresent(Cell::flag);
+        getCell(location).ifPresent(Cell::switchFlag);
     }
 
     public void reveal(Location location){

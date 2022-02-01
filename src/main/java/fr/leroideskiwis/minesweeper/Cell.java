@@ -11,8 +11,9 @@ public class Cell {
      */
     private final int value;
     private boolean reveal;
-    private boolean flag;
+
     private final Location location;
+    private boolean flagged;
 
     public Cell(Location location, List<Cell> neighbours){
         this(location, (int)neighbours
@@ -30,13 +31,17 @@ public class Cell {
         return value == -1;
     }
 
+    public boolean isFlagged() {
+        return flagged;
+    }
+
+    public void switchFlag() {
+        flagged = !flagged;
+    }
+
     public void reveal(){
         this.reveal = true;
     }
-
-    public void flag() { this.flag = !flag; }
-
-    public boolean isFlagged() {return flag;}
 
     public boolean isEmpty(){
         return value == 0;
@@ -52,7 +57,7 @@ public class Cell {
 
     @Override
     public String toString() {
-        if(flag) return "F";
+        if(flagged) return "F";
         if(!reveal) return "■";
         return switch (value) {
             case -1 -> /*"\uD83D\uDCA3"*/ "B";

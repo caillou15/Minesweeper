@@ -1,5 +1,4 @@
 package fr.leroideskiwis.minesweeper;
-
 import fr.leroideskiwis.minesweeper.commands.CommandManager;
 
 import java.util.Scanner;
@@ -36,6 +35,7 @@ public class Main {
                 System.out.println("Congratulations, you won !");
             }
         }
+
     }
 
 }
