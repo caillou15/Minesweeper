@@ -42,6 +42,15 @@ public class Cell {
         return value == 0;
     }
 
+    public void revealNeighbours(GameMap gameMap){
+        gameMap.getNeighbours(location).stream().filter(Cell::isEmpty).filter(cell -> !cell.reveal).forEach(cell -> {
+            cell.reveal();
+            cell.revealNeighbours(gameMap);
+        });
+
+        gameMap.getNeighbours(location).stream().filter(cell -> !cell.reveal && cell.value > 0).forEach(Cell::reveal);
+    }
+
     @Override
     public String toString() {
         if(!reveal) return "X";
