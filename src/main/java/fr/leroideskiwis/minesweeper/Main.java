@@ -20,6 +20,8 @@ public class Main {
             }
             System.out.println(gameMap);
 
+            gameMap.update();
+
             if(gameMap.isState(GameState.LOSE)){
                 System.out.println("Sorry, you have lost :(");
             }

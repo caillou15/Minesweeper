@@ -19,8 +19,8 @@ public class CommandManager {
             command = scanner.nextLine();
 
             String[] args = command.split(" ");
-            int x = Integer.parseInt(args[1]);
-            int y = Integer.parseInt(args[2]);
+            int x = args.length > 1 ? Integer.parseInt(args[1]) : -1;
+            int y = args.length > 2 ? Integer.parseInt(args[2]) : -1;
             Location location = new Location(x-1, y-1);
 
             switch (args[0]) {

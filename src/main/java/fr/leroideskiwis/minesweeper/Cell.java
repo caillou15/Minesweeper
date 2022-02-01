@@ -46,14 +46,14 @@ public class Cell {
         gameMap.getNeighbours(location).stream().filter(Cell::isEmpty).filter(cell -> !cell.reveal).forEach(cell -> {
             cell.reveal();
             cell.revealNeighbours(gameMap);
+            gameMap.getNeighbours(location).stream().filter(cell1 -> !cell1.reveal && cell1.value > 0).forEach(Cell::reveal);
         });
-
-        gameMap.getNeighbours(location).stream().filter(cell -> !cell.reveal && cell.value > 0).forEach(Cell::reveal);
     }
 
     @Override
     public String toString() {
-        if(!reveal) return "X";
+        if(flag) return "F";
+        if(!reveal) return "■";
         return switch (value) {
             case -1 -> /*"\uD83D\uDCA3"*/ "B";
             case 0 -> " ";
