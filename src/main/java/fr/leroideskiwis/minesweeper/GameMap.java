@@ -68,16 +68,19 @@ public class GameMap {
     @Override
     public String toString() {
 
-        StringBuilder stringBuilder = new StringBuilder("  ");
+        int margin = 2;
+
+        StringBuilder stringBuilder = new StringBuilder("\n").append(" ".repeat(margin+2));
         for(int i = 0 ; i < width; i++){
-            stringBuilder.append(i + 1).append(" ");
+            stringBuilder.append(i + 1).append(" ".repeat(margin));
         }
+        stringBuilder.append("\n  ").append("―".repeat((margin+1)*width));
 
         for(int x = 0; x < width; x++){
-            stringBuilder.append("\n").append(x+1).append(" ");
+            stringBuilder.append("\n").append(x+1).append("|").append(" ".repeat(margin));
             for(int y = 0; y < height; y++){
                 getCell(new Location(y, x)).ifPresent(stringBuilder::append);
-                stringBuilder.append(" ");
+                stringBuilder.append(" ".repeat(margin));
             }
         }
 

@@ -41,7 +41,7 @@ public class Cell {
     public String toString() {
         return switch (value) {
             case -1 -> /*"\uD83D\uDCA3"*/ "B";
-            case 0 -> ".";
+            case 0 -> " ";
             default -> String.valueOf(value);
         };
     }
