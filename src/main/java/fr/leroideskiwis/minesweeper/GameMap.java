@@ -6,7 +6,7 @@ public class GameMap {
 
     private int flagsUsed = 0;
     private final int totalBomb;
-    private final List<Case> cases = new ArrayList<>();
+    private final List<Cell> cells = new ArrayList<>();
     private final int height;
     private final int width;
 
@@ -29,34 +29,34 @@ public class GameMap {
         }
 
         for(Location location : locations){
-            cases.add(new Case(location, -1));
+            cells.add(new Cell(location, -1));
         }
 
     }
 
-    private Optional<Case> getCase(Location location){
-        return cases.stream().filter(case1 -> case1.isLocation(location)).findAny();
+    private Optional<Cell> getCell(Location location){
+        return cells.stream().filter(cell -> cell.isLocation(location)).findAny();
     }
 
-    private List<Case> getNeighbours(Location location) {
-        List<Case> neighbours = new ArrayList<>();
+    private List<Cell> getNeighbours(Location location) {
+        List<Cell> neighbours = new ArrayList<>();
         for (int x = -1; x < 1; x++) {
             for (int y = -1; y < 1; y++) {
 
                 Location newLocation = location.add(x, y);
-                getCase(newLocation).ifPresent(neighbours::add);
+                getCell(newLocation).ifPresent(neighbours::add);
 
             }
         }
         return neighbours;
     }
 
-    private void initOtherCases(){
+    private void initOtherCells(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
                 Location location = new Location(x, y);
-                List<Case> neighbours = getNeighbours(location);
-                cases.add(new Case(location, neighbours));
+                List<Cell> neighbours = getNeighbours(location);
+                cells.add(new Cell(location, neighbours));
             }
         }
 
