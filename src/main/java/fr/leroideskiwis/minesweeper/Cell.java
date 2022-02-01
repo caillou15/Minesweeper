@@ -40,8 +40,8 @@ public class Cell {
     @Override
     public String toString() {
         return switch (value) {
-            case -1 -> "\uD83D\uDCA3";
-            case 0 -> " ";
+            case -1 -> /*"\uD83D\uDCA3"*/ "B";
+            case 0 -> ".";
             default -> String.valueOf(value);
         };
     }
