@@ -38,10 +38,10 @@ public class GameMap {
         return cases.stream().filter(case1 -> case1.isLocation(location)).findAny();
     }
 
-    private List<Case> getNeighbours(Location location){
+    private List<Case> getNeighbours(Location location) {
         List<Case> neighbours = new ArrayList<>();
-        for(int x = -1; x < 1; x++){
-            for(int y = -1; y < 1; y++){
+        for (int x = -1; x < 1; x++) {
+            for (int y = -1; y < 1; y++) {
 
                 Location newLocation = location.add(x, y);
                 getCase(newLocation).ifPresent(neighbours::add);
@@ -49,6 +49,17 @@ public class GameMap {
             }
         }
         return neighbours;
+    }
+
+    private void initOtherCases(){
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
+                Location location = new Location(x, y);
+                List<Case> neighbours = getNeighbours(location);
+                cases.add(new Case(location, neighbours));
+            }
+        }
+
     }
 
 }

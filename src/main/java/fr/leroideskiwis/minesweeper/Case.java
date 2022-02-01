@@ -1,5 +1,7 @@
 package fr.leroideskiwis.minesweeper;
 
+import java.util.List;
+
 public class Case {
 
     /**
@@ -7,9 +9,16 @@ public class Case {
      * 0 : empty
      * > 1 : number of bombs around
      */
-    private int value;
+    private final int value;
     private boolean reveal;
     private final Location location;
+
+    public Case(Location location, List<Case> neighbours){
+        this(location, (int)neighbours
+                .stream()
+                .filter(Case::isBomb)
+                .count());
+    }
 
     public Case(Location location, int value){
         this.value = value;
