@@ -4,19 +4,23 @@ import java.util.*;
 
 public class GameMap {
 
-    private int flagsUsed = 0;
     private final int totalBomb;
     private final List<Cell> cells = new ArrayList<>();
     private final int height;
     private final int width;
+    private GameState state = GameState.PLAYING;
 
-    public GameMap(int height, int width, int totalBomb){
+    public GameMap(int width, int height, int totalBomb){
         this.height = height;
         this.width = width;
         this.totalBomb = totalBomb;
 
         createBombs();
         initOtherCells();
+    }
+
+    public boolean isState(GameState gameState){
+        return this.state == gameState;
     }
 
     private void createBombs(){
@@ -41,11 +45,11 @@ public class GameMap {
         return cells.stream().filter(cell -> cell.isLocation(location)).findAny();
     }
 
-    private List<Cell> getNeighbours(Location location) {
+    public List<Cell> getNeighbours(Location location) {
         List<Cell> neighbours = new ArrayList<>();
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
-
+                if (x == 0 && y == 0) continue;
                 Location newLocation = location.add(x, y);
                 getCell(newLocation).ifPresent(neighbours::add);
 
@@ -93,6 +97,11 @@ public class GameMap {
     }
 
     public void reveal(Location location){
-        getCell(location).ifPresent(Cell::reveal);
+        getCell(location).ifPresent(cell -> {
+            cell.reveal();
+            cell.revealNeighbours(this);
+            if(cell.isBomb()) state = GameState.LOSE;
+        });
+
     }
 }
