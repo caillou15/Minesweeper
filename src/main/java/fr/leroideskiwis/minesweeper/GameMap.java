@@ -9,6 +9,7 @@ public class GameMap {
     private final List<Cell> cells = new ArrayList<>();
     private final int height;
     private final int width;
+    private GameState state = GameState.PLAYING;
 
     public GameMap(int height, int width, int totalBomb){
         this.height = height;
@@ -17,6 +18,10 @@ public class GameMap {
 
         createBombs();
         initOtherCells();
+    }
+
+    public boolean isState(GameState gameState){
+        return this.state == gameState;
     }
 
     private void createBombs(){
@@ -93,6 +98,14 @@ public class GameMap {
     }
 
     public void reveal(Location location){
-        getCell(location).ifPresent(Cell::reveal);
+        getCell(location).ifPresent(cell -> {
+            cell.reveal();
+            if(cell.isBomb()) state = GameState.LOSE;
+        });
+
+    }
+
+    public void update(){
+        if(flagsUsed == totalBomb && cells.stream().filter(Cell::isBomb).count() == totalBomb) this.state = GameState.WIN;
     }
 }

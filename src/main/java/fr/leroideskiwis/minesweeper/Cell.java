@@ -34,7 +34,7 @@ public class Cell {
         this.reveal = true;
     }
 
-    public void flag() { this.flag = true; }
+    public void flag() { this.flag = !flag; }
 
     public boolean isFlagged() {return flag;}
 
