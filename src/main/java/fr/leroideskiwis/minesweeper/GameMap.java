@@ -14,6 +14,9 @@ public class GameMap {
         this.height = height;
         this.width = width;
         this.totalBomb = totalBomb;
+
+        createBombs();
+        initOtherCells();
     }
 
     private void createBombs(){
@@ -62,4 +65,23 @@ public class GameMap {
 
     }
 
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder("  ");
+        for(int i = 0 ; i < width; i++){
+            stringBuilder.append(i + 1).append(" ");
+        }
+
+        for(int x = 0; x < width; x++){
+            stringBuilder.append("\n").append(x+1).append(" ");
+            for(int y = 0; y < height; y++){
+                getCell(new Location(x, y)).ifPresent(stringBuilder::append);
+                stringBuilder.append(" ");
+            }
+        }
+
+        return stringBuilder.toString();
+
+    }
 }
