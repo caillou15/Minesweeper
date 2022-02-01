@@ -4,14 +4,13 @@ import java.util.*;
 
 public class GameMap {
 
-    private int flagsUsed = 0;
     private final int totalBomb;
     private final List<Cell> cells = new ArrayList<>();
     private final int height;
     private final int width;
     private GameState state = GameState.PLAYING;
 
-    public GameMap(int height, int width, int totalBomb){
+    public GameMap(int width, int height, int totalBomb){
         this.height = height;
         this.width = width;
         this.totalBomb = totalBomb;
@@ -104,9 +103,5 @@ public class GameMap {
             if(cell.isBomb()) state = GameState.LOSE;
         });
 
-    }
-
-    public void update(){
-        if(flagsUsed == totalBomb && cells.stream().filter(Cell::isBomb).count() == totalBomb) this.state = GameState.WIN;
     }
 }
