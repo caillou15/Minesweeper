@@ -1,9 +1,6 @@
 package fr.leroideskiwis.minesweeper;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameMap {
 
@@ -37,6 +34,21 @@ public class GameMap {
 
     }
 
+    private Optional<Case> getCase(Location location){
+        return cases.stream().filter(case1 -> case1.isLocation(location)).findAny();
+    }
 
+    private List<Case> getNeighbours(Location location){
+        List<Case> neighbours = new ArrayList<>();
+        for(int x = -1; x < 1; x++){
+            for(int y = -1; y < 1; y++){
+
+                Location newLocation = location.add(x, y);
+                getCase(newLocation).ifPresent(neighbours::add);
+
+            }
+        }
+        return neighbours;
+    }
 
 }

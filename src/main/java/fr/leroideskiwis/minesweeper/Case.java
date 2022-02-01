@@ -32,4 +32,8 @@ public class Case {
     public String toString() {
         return String.valueOf(value);
     }
+
+    public boolean isLocation(Location location) {
+        return location.equals(this.location);
+    }
 }
