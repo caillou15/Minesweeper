@@ -13,33 +13,25 @@ public class CommandManager {
         this.gameMap = gameMap;
     }
 
-    public void startListening(Scanner scanner){
+    public boolean handleCommand(Scanner scanner){
         String command;
-        while(true){
             System.out.print("> ");
             command = scanner.nextLine();
-            if(command.equals("exit")) {
-                System.out.println("Do you really want to quit ?");
-                if(scanner.nextLine().equals("yes")) break;
-            }
 
             String[] args = command.split(" ");
             int x = Integer.parseInt(args[1]);
             int y = Integer.parseInt(args[2]);
-            Location location = new Location(x, y);
+            Location location = new Location(x-1, y-1);
 
             switch (args[0]) {
                 case "flag" -> gameMap.flag(location);
                 case "reveal" -> gameMap.reveal(location);
+                case "exit" -> {
+                    return false;
+                }
                 default -> {
                 }
             }
-        }
-
+        return true;
     }
-
-    private void handleCommand(String command){
-
-    }
-
 }
