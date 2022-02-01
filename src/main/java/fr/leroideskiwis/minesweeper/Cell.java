@@ -39,10 +39,15 @@ public class Cell {
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return switch (value) {
+            case -1 -> "\uD83D\uDCA3";
+            case 0 -> " ";
+            default -> String.valueOf(value);
+        };
     }
 
     public boolean isLocation(Location location) {
         return location.equals(this.location);
     }
+
 }
