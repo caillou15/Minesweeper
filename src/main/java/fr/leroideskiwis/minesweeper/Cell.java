@@ -57,7 +57,7 @@ public class Cell {
 
     @Override
     public String toString() {
-        if(flag) return "F";
+        if(flagged) return "F";
         if(!reveal) return "■";
         return switch (value) {
             case -1 -> /*"\uD83D\uDCA3"*/ "B";
