@@ -11,7 +11,9 @@ public class Cell {
      */
     private final int value;
     private boolean reveal;
+
     private final Location location;
+    private boolean flagged;
 
     public Cell(Location location, List<Cell> neighbours){
         this(location, (int)neighbours
@@ -29,6 +31,14 @@ public class Cell {
         return value == -1;
     }
 
+    public boolean isFlagged() {
+        return flagged;
+    }
+
+    public void switchFlag() {
+        flagged = !flagged;
+    }
+
     public void reveal(){
         this.reveal = true;
     }
@@ -37,11 +47,21 @@ public class Cell {
         return value == 0;
     }
 
+    public void revealNeighbours(GameMap gameMap){
+        gameMap.getNeighbours(location).stream().filter(Cell::isEmpty).filter(cell -> !cell.reveal).forEach(cell -> {
+            cell.reveal();
+            cell.revealNeighbours(gameMap);
+            gameMap.getNeighbours(location).stream().filter(cell1 -> !cell1.reveal && cell1.value > 0).forEach(Cell::reveal);
+        });
+    }
+
     @Override
     public String toString() {
+        if(flagged) return "F";
+        if(!reveal) return "■";
         return switch (value) {
             case -1 -> /*"\uD83D\uDCA3"*/ "B";
-            case 0 -> ".";
+            case 0 -> " ";
             default -> String.valueOf(value);
         };
     }
